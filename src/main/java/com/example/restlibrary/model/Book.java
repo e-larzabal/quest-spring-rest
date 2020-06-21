@@ -17,9 +17,17 @@ public class Book {
 
     public Book() { }
 
-    public Book(String title, String description) {
-        this.title = title;
-        this.description = description;
+    public Book(String title, String author, String description) {
+        this.setTitle(title);
+        this.setAuthor(author);
+        this.setDescription(description);
+    }
+
+    public Book(Long id, String title, String author, String description) {
+        this.setId(id);
+        this.setTitle(title);
+        this.setAuthor(author);
+        this.setDescription(description);
     }
 
     public Long getId() { return id; }

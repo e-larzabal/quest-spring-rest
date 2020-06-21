@@ -8,9 +8,9 @@ import java.util.List;
 
 
 @Repository
-public interface BookRepository extends JpaRepository<Book,Long> {
+public interface BookRepository extends JpaRepository<Book, Long> {
 
-    // custom query to search to blog post by title or content
-    //List<Book> findByTitleContainingOrContentContaining(String text, String textAgain);
+    // custom query to search to book post by title or content
+    List<Book> findByTitleContainingOrDescriptionContaining(String text, String textAgain);
 
 }

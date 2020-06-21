@@ -1,12 +1,9 @@
 package com.example.restlibrary.controller;
 
 import com.example.restlibrary.model.Book;
-import com.example.restlibrary.model.SearchTerms;
 import com.example.restlibrary.repository.BookRepository;
 
-import org.springframework.stereotype.Controller;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
@@ -99,10 +96,12 @@ public class BookController {
     // Request HTTP : POST
     // Action DB : READ (SELECT)
     // Example : http://localhost:8080/books/search
-    /*@PostMapping("/book/search")
+    @PostMapping("/book/search")
+    @ResponseBody
     public List<Book> search(@RequestBody Map<String, String> body){
+        System.out.println(body);
         String searchTerm = body.get("text");
-        return bookRepository.findByTitleContainingOrContentContaining(searchTerm, searchTerm);
-    }*/
+        return bookRepository.findByTitleContainingOrDescriptionContaining(searchTerm, searchTerm);
+    }
 
 }
