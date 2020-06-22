@@ -6,6 +6,7 @@ import com.example.restlibrary.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.SQLException;
 import java.util.*;
 
 
@@ -22,10 +23,9 @@ public class BookController {
         try {
             return bookRepository.findAll();
         } catch (Exception e) {
-            List<Book> booksException = new ArrayList<>();
-            return booksException;
+            e.printStackTrace();
         }
-
+        return null;
     }
 
     // Request HTTP : GET
@@ -44,9 +44,9 @@ public class BookController {
             }
             return book;
         } catch (Exception e) {
-            Book bookException = new Book();
-            return bookException;
+            e.printStackTrace();
         }
+        return null;
     }
 
     // Request HTTP : POST
@@ -58,9 +58,9 @@ public class BookController {
         try {
             return bookRepository.save(book);
         } catch (Exception e) {
-            Book bookException = new Book();
-            return bookException;
+            e.printStackTrace();
         }
+        return null;
     }
 
     // Request HTTP : PUT
@@ -76,9 +76,9 @@ public class BookController {
             bookToUpdate.setDescription(book.getDescription());
             return bookRepository.save(bookToUpdate);
         } catch (Exception e) {
-            Book bookException = new Book();
-            return bookException;
+            e.printStackTrace();
         }
+        return null;
     }
 
     // Request HTTP : DELETE
@@ -89,7 +89,7 @@ public class BookController {
         try {
             bookRepository.deleteById(id);
         } catch (Exception e) {
-
+            e.printStackTrace();
         }
     }
 
@@ -99,9 +99,13 @@ public class BookController {
     @PostMapping("/book/search")
     @ResponseBody
     public List<Book> search(@RequestBody Map<String, String> body){
-        System.out.println(body);
-        String searchTerm = body.get("text");
-        return bookRepository.findByTitleContainingOrDescriptionContaining(searchTerm, searchTerm);
+        try {
+            String searchTerm = body.get("text");
+            return bookRepository.findByTitleContainingOrDescriptionContaining(searchTerm, searchTerm);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
 }
